@@ -1,0 +1,31 @@
+artifact_path: iris_model
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.9.18
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.5.0
+mlflow_version: 2.14.1
+model_size_bytes: 3529
+model_uuid: fae064a591b440c4a239a9a5ee8bc2be
+run_id: 9a46c55242c74cb6991278f23f4b7514
+saved_input_example_info:
+  artifact_path: input_example.json
+  pandas_orient: split
+  type: dataframe
+signature:
+  inputs: '[{"type": "double", "name": "SepalLengthCm", "required": true}, {"type":
+    "double", "name": "SepalWidthCm", "required": true}, {"type": "double", "name":
+    "PetalLengthCm", "required": true}, {"type": "double", "name": "PetalWidthCm",
+    "required": true}]'
+  outputs: '[{"type": "tensor", "tensor-spec": {"dtype": "object", "shape": [-1]}}]'
+  params: null
+utc_time_created: '2024-08-18 16:08:22.126526'

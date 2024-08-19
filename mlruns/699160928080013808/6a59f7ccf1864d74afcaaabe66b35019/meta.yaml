@@ -1,0 +1,15 @@
+artifact_uri: file:///Users/user/Desktop/personal/mlops/mlops_iris_detection/mlruns/699160928080013808/6a59f7ccf1864d74afcaaabe66b35019/artifacts
+end_time: 1724000308462
+entry_point_name: ''
+experiment_id: '699160928080013808'
+lifecycle_stage: active
+run_id: 6a59f7ccf1864d74afcaaabe66b35019
+run_name: welcoming-hen-571
+run_uuid: 6a59f7ccf1864d74afcaaabe66b35019
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1724000307565
+status: 3
+tags: []
+user_id: user

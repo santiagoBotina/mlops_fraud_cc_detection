@@ -1,0 +1,6 @@
+artifact_location: file:///Users/user/Desktop/personal/mlops/mlops_iris_detection/mlruns/699160928080013808
+creation_time: 1724000273524
+experiment_id: '699160928080013808'
+last_update_time: 1724000273524
+lifecycle_stage: active
+name: Iris model training

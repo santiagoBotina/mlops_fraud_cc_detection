@@ -1,0 +1,10 @@
+pandas
+jupyter
+seaborn
+matplotlib
+tensorflow
+scikit-learn
+numpy
+imblearn
+mlflow
+apache-airflow
