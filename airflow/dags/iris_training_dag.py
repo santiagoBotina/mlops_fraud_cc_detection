@@ -1,6 +1,4 @@
 import os
-
-from airflow.decorators import dag, task
 from airflow import DAG
 from airflow.operators.python import PythonOperator
 from sklearn.model_selection import train_test_split
@@ -14,6 +12,9 @@ import mlflow
 
 data_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../data'))
 model_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../models'))
+root_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), '../..'))
+
+
 def process_data():
     data = pd.read_csv('./data/Iris.csv')
     data = data.drop(columns=['Id'])
@@ -48,11 +49,24 @@ def train_model():
     with open(f'{model_dir}/iris_model.pkl', 'wb') as file:
         pickle.dump(model, file)
 
-    # MLflow
-    #mlflow.set_tracking_uri(uri="http://127.0.0.1:5000")
+    mlflow_tracking_uri = f'file://{root_dir}/mlflow'
+    print(f"MLflow tracking URI: {mlflow_tracking_uri}")
+    mlflow.set_tracking_uri(mlflow_tracking_uri)
     mlflow.set_experiment("Iris model training")
+    mlflow.set_experiment_tags(
+        {
+            "project": "Iris model training",
+            "task": "Classification",
+        }
+    )
 
     mlflow.start_run()
+    
+    mlflow.log_artifact(f'{data_dir}/x_train.csv')
+    mlflow.log_artifact(f'{data_dir}/x_test.csv')
+    mlflow.log_artifact(f'{data_dir}/y_train.csv')
+    mlflow.log_artifact(f'{data_dir}/y_test.csv')
+    
     mlflow.log_param("params", model.get_params())
     mlflow.log_metric("accuracy", model.score(x_test, y_test) * 100)
     mlflow.log_metric("accuracy_score", accuracy_score(y_test, y_pred))
@@ -67,7 +81,8 @@ def train_model():
         artifact_path="iris_model",
         signature=signature,
         input_example=x_train,
-        registered_model_name="tracking-quickstart",
+        registered_model_name="iris",
+        pip_requirements="requirements.txt"
     )
 
     # Load the model back for predictions as a generic Python Function model
